@@ -3,6 +3,7 @@ import { View, Text, SectionList, TouchableOpacity, StyleSheet, TextInput, Image
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/RootNavigator';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 type NavProp = NativeStackNavigationProp<RootStackParamList>;
 
