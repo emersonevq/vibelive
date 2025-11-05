@@ -30,7 +30,7 @@ export default function ChatScreen({ route, navigation }: Props) {
       <KeyboardAvoidingView style={[styles.container]} behavior={Platform.select({ ios: 'padding', android: undefined })}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backBtn}>
-            <Text style={styles.backIcon}>←</Text>
+            <Text style={styles.backIcon}>‹</Text>
           </TouchableOpacity>
 
           {avatarUrl ? (
@@ -43,7 +43,7 @@ export default function ChatScreen({ route, navigation }: Props) {
 
           <View style={styles.headerInfo}>
             <Text style={styles.headerTitle}>{chatName}</Text>
-            <Text style={styles.headerSubtitle}>Estudando para as provas!</Text>
+            <Text style={styles.headerSubtitle}>Disponível para conversar!</Text>
           </View>
 
           <View style={styles.headerActions}>
@@ -51,10 +51,10 @@ export default function ChatScreen({ route, navigation }: Props) {
               <Text style={styles.actionIcon}>📞</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.actionBtn}>
-              <Text style={styles.actionIcon}>🎥</Text>
+              <Text style={styles.actionIcon}>📷</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.actionBtn}>
-              <Text style={styles.actionIcon}>×</Text>
+              <Text style={styles.actionIcon}>✕</Text>
             </TouchableOpacity>
           </View>
         </View>
