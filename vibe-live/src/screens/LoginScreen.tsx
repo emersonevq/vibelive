@@ -11,8 +11,8 @@ type AuthNavProp = NativeStackNavigationProp<RootStackParamList>;
 export default function LoginScreen() {
   const navigation = useNavigation<AuthNavProp>();
   const { signIn } = useAuth();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState(__DEV__ ? 'teste@mail.com' : '');
+  const [password, setPassword] = useState(__DEV__ ? '123' : '');
 
   const handleLogin = async () => {
     try {
