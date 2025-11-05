@@ -28,7 +28,7 @@ function MainTabs() {
         headerShown: false,
       }}
     >
-      <Tab.Screen name="Feed" component={require('../screens/ScrapsScreen').default} />
+      <Tab.Screen name="Recados" component={require('../screens/ScrapsScreen').default} />
 
       <Tab.Screen name="Story" component={require('../screens/StoryScreen').default} />
 

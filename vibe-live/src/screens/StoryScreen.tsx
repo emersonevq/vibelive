@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, Modal, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import MediaSelector from './story/MediaSelector';
+import StoryEditor from './story/StoryEditor';
+import { StoryDraft } from './story/types';
 
 const STORIES = [
   { id: '1', name: 'Ana Silva', avatarUrl: 'https://randomuser.me/api/portraits/women/65.jpg', hasStory: true, time: 'há 2 horas' },
@@ -13,7 +16,9 @@ const STORIES = [
 
 export default function StoryScreen() {
   const [selectedStory, setSelectedStory] = useState<string | null>(null);
-  const [storyIndex, setStoryIndex] = useState(0);
+  const [mediaSelectorVisible, setMediaSelectorVisible] = useState(false);
+  const [selectedMediaUri, setSelectedMediaUri] = useState<string | null>(null);
+  const [storyEditorVisible, setStoryEditorVisible] = useState(false);
 
   const currentStory = selectedStory ? STORIES.find(s => s.id === selectedStory) : null;
   const activeStories = STORIES.filter(s => s.hasStory);
@@ -35,14 +40,46 @@ export default function StoryScreen() {
   };
 
   const handleAddStory = () => {
-    Alert.alert('Adicionar Story', 'Selecione uma opção para criar seu story', [
-      { text: 'Câmera', onPress: () => Alert.alert('Câmera', 'Abrir câmera') },
-      { text: 'Galeria', onPress: () => Alert.alert('Galeria', 'Abrir galeria') },
-      { text: 'Cancelar', onPress: () => {} },
+    setMediaSelectorVisible(true);
+  };
+
+  const handleMediaSelected = (uri: string) => {
+    setSelectedMediaUri(uri);
+    setMediaSelectorVisible(false);
+    setStoryEditorVisible(true);
+  };
+
+  const handlePublishStory = (draft: StoryDraft) => {
+    Alert.alert('Sucesso', 'Seu story foi publicado!', [
+      {
+        text: 'OK',
+        onPress: () => {
+          setStoryEditorVisible(false);
+          setSelectedMediaUri(null);
+        },
+      },
     ]);
   };
 
+  const handleCancelEditor = () => {
+    setStoryEditorVisible(false);
+    setSelectedMediaUri(null);
+  };
+
+  if (storyEditorVisible && selectedMediaUri) {
+    return (
+      <>
+        <StoryEditor
+          imageUri={selectedMediaUri}
+          onPublish={handlePublishStory}
+          onCancel={handleCancelEditor}
+        />
+      </>
+    );
+  }
+
   return (
+    <>
     <SafeAreaView style={styles.container}>
       {/* Header moderno */}
       <View style={styles.header}>
@@ -217,6 +254,12 @@ export default function StoryScreen() {
         </View>
       </View>
     </SafeAreaView>
+    <MediaSelector
+      visible={mediaSelectorVisible}
+      onMediaSelected={handleMediaSelected}
+      onCancel={() => setMediaSelectorVisible(false)}
+    />
+    </>
   );
 }
 

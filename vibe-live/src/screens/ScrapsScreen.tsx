@@ -61,7 +61,7 @@ export default function ScrapsScreen() {
             <MaterialCommunityIcons name="file-document" size={24} color="#16a34a" />
           </View>
           <View>
-            <Text style={styles.title}>Scraps Rápidos</Text>
+            <Text style={styles.title}>Recados</Text>
             <Text style={styles.subtitle}>Mensagens que desaparecem em 1h</Text>
           </View>
         </View>

@@ -9,7 +9,7 @@ export default function CustomTabBar({ state, descriptors, navigation }: BottomT
 
   const getIconName = (routeName: string, focused: boolean) => {
     switch (routeName) {
-      case 'Feed':
+      case 'Recados':
         return focused ? 'home' : 'home-outline';
       case 'Story':
         return focused ? 'image' : 'image-outline';
@@ -24,8 +24,8 @@ export default function CustomTabBar({ state, descriptors, navigation }: BottomT
 
   const getLabel = (routeName: string) => {
     switch (routeName) {
-      case 'Feed':
-        return 'Feed';
+      case 'Recados':
+        return 'Recados';
       case 'Story':
         return 'Stories';
       case 'Mensagens':
