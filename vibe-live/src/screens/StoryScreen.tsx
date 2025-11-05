@@ -158,7 +158,16 @@ export default function StoryScreen() {
 
               {/* Conteúdo do story */}
               {currentStory?.composition ? (
-                <View style={[styles.storyFullImage, { backgroundColor: currentStory.composition.background.type === 'color' ? currentStory.composition.background.color : '#000' }]}>
+                <View style={styles.storyFullImage}>
+                  {currentStory.composition.background.type === 'color' && (
+                    <View style={[StyleSheet.absoluteFill, { backgroundColor: currentStory.composition.background.color }]} />
+                  )}
+                  {currentStory.composition.background.type === 'image' && (
+                    <Image source={{ uri: currentStory.composition.background.uri }} style={StyleSheet.absoluteFill as any} resizeMode="cover" />
+                  )}
+                  {currentStory.composition.background.type === 'video' && (
+                    <Video source={{ uri: currentStory.composition.background.uri }} style={StyleSheet.absoluteFill as any} resizeMode="cover" shouldPlay isMuted />
+                  )}
                   {currentStory.composition.texts.map((t) => (
                     <Text key={t.id} style={{ position: 'absolute', left: `${t.x * 100}%`, top: `${t.y * 100}%`, color: t.color, fontSize: t.fontSize, fontFamily: t.fontFamily, transform: [{ rotate: `${t.rotation}deg` }, { scale: t.scale }] }}>
                       {t.text}
