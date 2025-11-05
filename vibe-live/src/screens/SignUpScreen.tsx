@@ -1,18 +1,25 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Alert } from 'react-native';
 import PrimaryButton from '../components/PrimaryButton';
+import { useAuth } from '../navigation/auth';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../navigation/RootNavigator';
 
-type Props = {
-  onNavigate: (to: 'Login' | 'SignUp' | 'Home' | 'Chat', params?: { chatId?: string }) => void;
-};
+type AuthNavProp = NativeStackNavigationProp<RootStackParamList>;
 
-export default function SignUpScreen({ onNavigate }: Props) {
+export default function SignUpScreen() {
+  const navigation = useNavigation<AuthNavProp>();
+  const { signUp } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSignUp = () => {
-    // Placeholder: signup flow
-    onNavigate('Home');
+  const handleSignUp = async () => {
+    try {
+      await signUp(email.trim(), password);
+    } catch (err: any) {
+      Alert.alert('Erro', err.message || 'Não foi possível criar conta');
+    }
   };
 
   return (
@@ -38,7 +45,7 @@ export default function SignUpScreen({ onNavigate }: Props) {
 
       <PrimaryButton title="Criar conta" onPress={handleSignUp} />
 
-      <Text style={styles.note} onPress={() => onNavigate('Login')}>Já tem conta? Entrar</Text>
+      <Text style={styles.note} onPress={() => navigation.navigate('Login' as any)}>Já tem conta? Entrar</Text>
     </View>
   );
 }
