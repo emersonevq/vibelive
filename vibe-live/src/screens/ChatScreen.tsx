@@ -132,5 +132,5 @@ const styles = StyleSheet.create({
   attachBtn: { padding: 8 },
   textInput: { flex: 1, backgroundColor: '#f3f4f6', borderRadius: 20, paddingHorizontal: 16, paddingVertical: 10, fontSize: 14, marginHorizontal: 4, maxHeight: 100 },
   emojiBtn: { padding: 8 },
-  sendBtn: { backgroundColor: '#2563EB', width: 40, height: 40, borderRadius: 20, alignItems: 'center', justifyContent: 'center', marginLeft: 4, marginRight: 4 },
+  sendBtn: { backgroundColor: '#16a34a', width: 40, height: 40, borderRadius: 20, alignItems: 'center', justifyContent: 'center', marginLeft: 4, marginRight: 4 },
 });
