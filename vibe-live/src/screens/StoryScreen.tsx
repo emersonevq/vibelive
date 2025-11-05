@@ -48,10 +48,10 @@ export default function StoryScreen() {
         <Text style={styles.title}>Stories</Text>
       </View>
 
-      <ScrollView 
-        horizontal 
-        showsHorizontalScrollIndicator={false} 
-        style={styles.storiesRow} 
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        style={styles.storiesRow}
         contentContainerStyle={styles.storiesContent}
       >
         <TouchableOpacity style={styles.addStoryCard} onPress={handleAddStory}>
@@ -62,7 +62,7 @@ export default function StoryScreen() {
           <Text style={styles.storyTimeSmall}>Agora</Text>
         </TouchableOpacity>
 
-        {STORIES.map((story) => (
+        {Array.isArray(STORIES) && STORIES.map((story) => (
           <TouchableOpacity 
             key={story.id} 
             style={styles.storyCard}
