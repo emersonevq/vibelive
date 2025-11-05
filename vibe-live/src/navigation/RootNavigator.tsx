@@ -8,6 +8,7 @@ import ChatScreen from '../screens/ChatScreen';
 import { useAuth } from './auth';
 import { NavigationContainer } from '@react-navigation/native';
 import { Text } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 export type RootStackParamList = {
   Auth: undefined;
