@@ -212,8 +212,8 @@ const styles = StyleSheet.create({
 
   storyViewerFooter: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 8, paddingVertical: 16, backgroundColor: 'rgba(0,0,0,0.4)' },
   storyActionButton: { width: 50, height: 50, alignItems: 'center', justifyContent: 'center' },
-  storyActions: { flexDirection: 'row', gap: 12 },
-  storyFooterButton: { width: 44, height: 44, borderRadius: 22, backgroundColor: 'rgba(22,163,74,0.6)', alignItems: 'center', justifyContent: 'center' },
+  storyActions: { flexDirection: 'row', gap: 12, alignItems: 'center' },
+  storyFooterButton: { width: 44, height: 44, borderRadius: 22, backgroundColor: 'rgba(22,163,74,0.6)', alignItems: 'center', justifyContent: 'center', marginHorizontal: 6 },
 
   statsSection: { backgroundColor: '#fff', paddingHorizontal: 12, paddingVertical: 12, borderTopWidth: 1, borderTopColor: '#e5e7eb', gap: 10 },
   statCard: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#f8fafc', padding: 12, borderRadius: 10 },
