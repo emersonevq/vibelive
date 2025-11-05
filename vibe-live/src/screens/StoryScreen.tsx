@@ -93,7 +93,7 @@ export default function StoryScreen() {
           >
             <View style={styles.storyModal}>
               <View style={styles.storyProgressBar}>
-                {STORIES.map((story, idx) => (
+                {Array.isArray(STORIES) && STORIES.map((story, idx) => (
                   <View
                     key={story.id}
                     style={[
