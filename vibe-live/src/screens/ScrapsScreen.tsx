@@ -45,7 +45,7 @@ export default function ScrapsScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <MaterialIcon name="file-document" size={24} color="#2563EB" />
+        <MaterialIcon name="file-document" size={24} color="#16a34a" />
         <Text style={styles.title}>Scraps Rápidos</Text>
       </View>
 
@@ -109,15 +109,15 @@ const styles = StyleSheet.create({
   composerLabel: { fontSize: 13, fontWeight: '600', color: '#6b7280', marginBottom: 12 },
   composer: { flexDirection: 'row', alignItems: 'flex-end', gap: 8 },
   input: { flex: 1, backgroundColor: '#f9fafb', borderRadius: 12, paddingHorizontal: 14, paddingVertical: 10, fontSize: 14, color: '#111827', borderWidth: 1, borderColor: '#e5e7eb', maxHeight: 80 },
-  button: { backgroundColor: '#2563EB', width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center' },
+  button: { backgroundColor: '#16a34a', width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center' },
   empty: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 40 },
   emptyText: { fontSize: 16, color: '#6b7280', fontWeight: '600', marginTop: 12 },
   emptySubtext: { fontSize: 13, color: '#9ca3af', marginTop: 4, textAlign: 'center' },
   listContent: { padding: 12 },
   card: { backgroundColor: '#fff', padding: 14, borderRadius: 12, marginBottom: 10, elevation: 1, shadowColor: '#000', shadowOpacity: 0.04, shadowRadius: 3, shadowOffset: { width: 0, height: 1 } },
   cardHeader: { flexDirection: 'row', alignItems: 'center', marginBottom: 12 },
-  authorAvatar: { width: 40, height: 40, borderRadius: 20, backgroundColor: '#dbeafe', alignItems: 'center', justifyContent: 'center', marginRight: 12 },
-  authorInitial: { color: '#2563EB', fontWeight: '700', fontSize: 14 },
+  authorAvatar: { width: 40, height: 40, borderRadius: 20, backgroundColor: '#dcfce7', alignItems: 'center', justifyContent: 'center', marginRight: 12 },
+  authorInitial: { color: '#16a34a', fontWeight: '700', fontSize: 14 },
   cardMeta: { flex: 1 },
   cardAuthor: { fontWeight: '700', fontSize: 14, color: '#111827' },
   timeRow: { flexDirection: 'row', alignItems: 'center', marginTop: 2 },
