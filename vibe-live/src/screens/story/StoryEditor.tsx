@@ -36,6 +36,8 @@ export default function StoryEditor({
   const [textModalVisible, setTextModalVisible] = useState(false);
   const [textInput, setTextInput] = useState('');
   const [duration, setDuration] = useState(5);
+  const [textEditorVisible, setTextEditorVisible] = useState(false);
+  const [selectedText, setSelectedText] = useState<TextElement | null>(null);
 
   const handleAddText = () => {
     if (textInput.trim()) {
