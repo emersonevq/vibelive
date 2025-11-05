@@ -46,6 +46,8 @@ export default function StoryEditor({
   const [currentFilter, setCurrentFilter] = useState<FilterType>('original');
   const [cropVisible, setCropVisible] = useState(false);
   const [crop, setCrop] = useState<CropType | null>(null);
+  const [stickersVisible, setStickersVisible] = useState(false);
+  const [interactiveElementsVisible, setInteractiveElementsVisible] = useState(false);
 
   const handleAddText = () => {
     if (textInput.trim()) {
