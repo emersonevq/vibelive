@@ -272,10 +272,19 @@ export default function StoryEditor({ initialBackground, onClose, onPublish }: P
               <Text style={styles.actionPrimaryText}>Adicionar Texto</Text>
             </TouchableOpacity>
           </View>
-          {texts.length > 0 && (
+          {selectedTextId && (
             <View style={styles.row}>
-              <Text style={{ color: '#e5e7eb', fontWeight: '700' }}>Editar conteúdo selecionado</Text>
-              <Text style={{ color: '#94a3b8' }}>Toque e arraste o texto na tela</Text>
+              <TextInput
+                accessibilityLabel="Editar texto"
+                placeholder="Digite o texto"
+                placeholderTextColor="#94a3b8"
+                style={{ flex: 1, backgroundColor: 'rgba(255,255,255,0.08)', color: '#e5e7eb', borderRadius: 10, paddingHorizontal: 10, paddingVertical: 8 }}
+                value={texts.find(t => t.id === selectedTextId)?.text || ''}
+                onChangeText={(v) => updateText(selectedTextId, { text: v })}
+              />
+              <TouchableOpacity accessibilityLabel="Remover texto" onPress={() => { removeText(selectedTextId); setSelectedTextId(null); }} style={[styles.pill, { backgroundColor: '#ef4444' }]}>
+                <MaterialCommunityIcons name="delete" color="#fff" size={18} />
+              </TouchableOpacity>
             </View>
           )}
         </View>
