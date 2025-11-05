@@ -30,7 +30,7 @@ export default function ChatScreen({ route, navigation }: Props) {
       <KeyboardAvoidingView style={[styles.container]} behavior={Platform.select({ ios: 'padding', android: undefined })}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backBtn}>
-            <MaterialIcon name="arrow-left" size={24} color="#111827" />
+            <MaterialCommunityIcons name="arrow-left" size={24} color="#111827" />
           </TouchableOpacity>
 
           {avatarUrl ? (
@@ -48,13 +48,13 @@ export default function ChatScreen({ route, navigation }: Props) {
 
           <View style={styles.headerActions}>
             <TouchableOpacity style={styles.actionBtn}>
-              <MaterialIcon name="phone" size={22} color="#6b7280" />
+              <MaterialCommunityIcons name="phone" size={22} color="#6b7280" />
             </TouchableOpacity>
             <TouchableOpacity style={styles.actionBtn}>
-              <MaterialIcon name="video" size={22} color="#6b7280" />
+              <MaterialCommunityIcons name="video" size={22} color="#6b7280" />
             </TouchableOpacity>
             <TouchableOpacity style={styles.actionBtn}>
-              <MaterialIcon name="information" size={22} color="#6b7280" />
+              <MaterialCommunityIcons name="information" size={22} color="#6b7280" />
             </TouchableOpacity>
           </View>
         </View>
@@ -77,10 +77,10 @@ export default function ChatScreen({ route, navigation }: Props) {
         <View style={[styles.inputContainer, { paddingBottom: Math.max(insets.bottom, 8) }]}>
           <View style={styles.inputRow}>
             <TouchableOpacity style={styles.attachBtn}>
-              <MaterialIcon name="paperclip" size={22} color="#16a34a" />
+              <MaterialCommunityIcons name="paperclip" size={22} color="#16a34a" />
             </TouchableOpacity>
             <TouchableOpacity style={styles.attachBtn}>
-              <MaterialIcon name="image-plus" size={22} color="#16a34a" />
+              <MaterialCommunityIcons name="image-plus" size={22} color="#16a34a" />
             </TouchableOpacity>
             <TextInput
               value={text}
@@ -92,10 +92,10 @@ export default function ChatScreen({ route, navigation }: Props) {
               maxHeight={100}
             />
             <TouchableOpacity style={styles.emojiBtn}>
-              <MaterialIcon name="emoticon-happy-outline" size={22} color="#16a34a" />
+              <MaterialCommunityIcons name="emoticon-happy-outline" size={22} color="#16a34a" />
             </TouchableOpacity>
             <TouchableOpacity onPress={send} style={styles.sendBtn}>
-              <MaterialIcon name="send" size={20} color="#fff" />
+              <MaterialCommunityIcons name="send" size={20} color="#fff" />
             </TouchableOpacity>
           </View>
         </View>
