@@ -185,17 +185,17 @@ export default function StoryEditor({
 
         <TouchableOpacity
           style={styles.toolButton}
-          disabled
+          onPress={() => setFiltersVisible(true)}
         >
-          <MaterialCommunityIcons name="palette" size={24} color="#ccc" />
+          <MaterialCommunityIcons name="palette" size={24} color="#16a34a" />
           <Text style={styles.toolButtonLabel}>Filtros</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.toolButton}
-          disabled
+          onPress={() => setCropVisible(true)}
         >
-          <MaterialCommunityIcons name="crop" size={24} color="#ccc" />
+          <MaterialCommunityIcons name="crop" size={24} color="#16a34a" />
           <Text style={styles.toolButtonLabel}>Cortar</Text>
         </TouchableOpacity>
       </ScrollView>
