@@ -1,25 +1,26 @@
 import React from 'react';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { TextProps } from 'react-native';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import { TextStyle } from 'react-native';
 
-interface MaterialIconProps extends TextProps {
+interface MaterialIconProps {
   name: string;
   size?: number;
   color?: string;
+  style?: TextStyle | TextStyle[];
 }
 
-export default function MaterialIcon({ 
-  name, 
-  size = 24, 
-  color = '#000', 
-  ...props 
+export default function MaterialIcon({
+  name,
+  size = 24,
+  color = '#000',
+  style,
 }: MaterialIconProps) {
   return (
-    <MaterialCommunityIcons 
-      name={name} 
-      size={size} 
+    <MaterialCommunityIcons
+      name={name}
+      size={size}
       color={color}
-      {...props}
+      style={style as any}
     />
   );
 }
