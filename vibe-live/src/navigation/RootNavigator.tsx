@@ -5,6 +5,7 @@ import LoginScreen from '../screens/LoginScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import HomeScreen from '../screens/HomeScreen';
 import ChatScreen from '../screens/ChatScreen';
+import NotificationsScreen from '../screens/NotificationsScreen';
 import { useAuth } from './auth';
 import { NavigationContainer } from '@react-navigation/native';
 import CustomTabBar from './CustomTabBar';
@@ -12,6 +13,7 @@ import CustomTabBar from './CustomTabBar';
 export type RootStackParamList = {
   Auth: undefined;
   Main: undefined;
+  Notifications: undefined;
   Chat: { chatId: string; name?: string; avatarUrl?: string } | undefined;
 };
 
@@ -51,6 +53,7 @@ export default function RootNavigator() {
           <>
             <Stack.Screen name="Main" component={MainTabs} />
             <Stack.Screen name="Chat" component={ChatScreen} />
+            <Stack.Screen name="Notifications" component={NotificationsScreen} />
           </>
         )}
       </Stack.Navigator>
