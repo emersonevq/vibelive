@@ -8,6 +8,8 @@ type Props = NativeStackScreenProps<RootStackParamList, 'Chat'>;
 
 export default function ChatScreen({ route, navigation }: Props) {
   const chatId = route.params?.chatId ?? 'unknown';
+  const chatName = route.params?.name ?? 'Contato';
+  const avatarUrl = route.params?.avatarUrl;
   const [messages, setMessages] = useState<{ id: string; text: string; fromMe?: boolean; time?: string }[]>([
     { id: 'm1', text: 'Oi! Como você está?', fromMe: false, time: '14:30' },
     { id: 'm2', text: 'Oi! Tudo bem sim, e você?', fromMe: true, time: '14:32' },
