@@ -21,7 +21,10 @@ const Tab = createBottomTabNavigator();
 function MainTabs() {
   return (
     <Tab.Navigator screenOptions={{ headerShown: false }}>
+      <Tab.Screen name="Scraps" component={require('../screens/ScrapsScreen').default} />
+      <Tab.Screen name="Story" component={require('../screens/StoryScreen').default} />
       <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Profile" component={require('../screens/ProfileScreen').default} />
     </Tab.Navigator>
   );
 }
