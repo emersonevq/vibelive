@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../navigation/RootNavigator';
 
-type Props = {
-  onNavigate: (to: 'Login' | 'SignUp' | 'Home' | 'Chat', params?: { chatId?: string }) => void;
-};
+type NavProp = NativeStackNavigationProp<RootStackParamList>;
 
 const MOCK_CHATS = [
   { id: '1', name: 'Amigos' },
@@ -11,7 +12,9 @@ const MOCK_CHATS = [
   { id: '3', name: 'Trabalho' },
 ];
 
-export default function HomeScreen({ onNavigate }: Props) {
+export default function HomeScreen() {
+  const navigation = useNavigation<NavProp>();
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Conversas</Text>
@@ -19,7 +22,7 @@ export default function HomeScreen({ onNavigate }: Props) {
         data={MOCK_CHATS}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <TouchableOpacity style={styles.item} onPress={() => onNavigate('Chat', { chatId: item.id })}>
+          <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('Chat', { chatId: item.id })}>
             <Text style={styles.itemText}>{item.name}</Text>
           </TouchableOpacity>
         )}
