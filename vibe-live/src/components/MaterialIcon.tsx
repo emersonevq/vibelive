@@ -1,6 +1,6 @@
 import React from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { TextStyle } from 'react-native';
+import { TextStyle, View, Text } from 'react-native';
 
 interface MaterialIconProps {
   name: string;
@@ -16,11 +16,16 @@ export default function MaterialIcon({
   style,
 }: MaterialIconProps) {
   return (
-    <MaterialCommunityIcons
-      name={name}
-      size={size}
-      color={color}
-      style={style as any}
-    />
+    <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+      <MaterialCommunityIcons
+        name={name}
+        size={size}
+        color={color}
+        style={style as any}
+      />
+      {__DEV__ && (
+        <Text style={{ position: 'absolute', bottom: -10, fontSize: 8, color: '#999' }}>{name}</Text>
+      )}
+    </View>
   );
 }
