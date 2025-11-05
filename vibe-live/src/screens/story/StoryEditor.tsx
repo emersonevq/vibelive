@@ -40,6 +40,10 @@ export default function StoryEditor({
   const [duration, setDuration] = useState(5);
   const [textEditorVisible, setTextEditorVisible] = useState(false);
   const [selectedText, setSelectedText] = useState<TextElement | null>(null);
+  const [filtersVisible, setFiltersVisible] = useState(false);
+  const [currentFilter, setCurrentFilter] = useState<FilterType>('original');
+  const [cropVisible, setCropVisible] = useState(false);
+  const [crop, setCrop] = useState<CropType | null>(null);
 
   const handleAddText = () => {
     if (textInput.trim()) {
