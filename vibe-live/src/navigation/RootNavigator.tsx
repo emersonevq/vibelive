@@ -7,7 +7,7 @@ import HomeScreen from '../screens/HomeScreen';
 import ChatScreen from '../screens/ChatScreen';
 import { useAuth } from './auth';
 import { NavigationContainer } from '@react-navigation/native';
-import MaterialIcon from '../components/MaterialIcon';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export type RootStackParamList = {
   Auth: undefined;
@@ -51,7 +51,7 @@ function MainTabs() {
         component={require('../screens/ScrapsScreen').default}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
-            <MaterialIcon
+            <MaterialCommunityIcons
               name={focused ? 'file-document' : 'file-document-outline'}
               size={size}
               color={color}
@@ -65,7 +65,7 @@ function MainTabs() {
         component={require('../screens/StoryScreen').default}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
-            <MaterialIcon
+            <MaterialCommunityIcons
               name={focused ? 'image' : 'image-outline'}
               size={size}
               color={color}
@@ -79,7 +79,7 @@ function MainTabs() {
         component={HomeScreen}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
-            <MaterialIcon
+            <MaterialCommunityIcons
               name={focused ? 'chat' : 'chat-outline'}
               size={size}
               color={color}
@@ -93,7 +93,7 @@ function MainTabs() {
         component={require('../screens/ProfileScreen').default}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
-            <MaterialIcon
+            <MaterialCommunityIcons
               name={focused ? 'account' : 'account-outline'}
               size={size}
               color={color}
