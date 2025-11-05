@@ -100,7 +100,11 @@ const styles = StyleSheet.create({
   bubbleLeft: { backgroundColor: '#f3f4f6', borderTopLeftRadius: 6, borderBottomLeftRadius: 6 },
   bubbleRight: { backgroundColor: '#2563EB', borderTopRightRadius: 6, borderBottomRightRadius: 6 },
   bubbleText: { color: '#000' },
+  bubbleTextRight: { color: '#fff' },
+  bubbleTextLeft: { color: '#111827' },
   time: { fontSize: 11, color: '#6b7280', marginTop: 6, textAlign: 'right' },
+  timeRight: { color: '#e6f0ff', fontSize: 11, marginTop: 6, textAlign: 'right' },
+  timeLeft: { color: '#6b7280', fontSize: 11, marginTop: 6, textAlign: 'right' },
 
   composer: { position: 'absolute', left: 0, right: 0, bottom: 0, flexDirection: 'row', alignItems: 'center', padding: 8, borderTopWidth: 1, borderColor: '#e5e7eb', backgroundColor: '#fff' },
   iconBtn: { padding: 8 },
