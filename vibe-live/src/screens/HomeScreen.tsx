@@ -50,7 +50,7 @@ export default function HomeScreen() {
         <View style={styles.appBarLeft}>
           <View style={styles.logoContainer}>
             <View style={styles.logoCircle}>
-              <MaterialIcon name="chat-bubble" size={18} color="#fff" />
+              <MaterialIcon name="chat" size={18} color="#fff" />
             </View>
             <View>
               <Text style={styles.appTitle}>Live Messenger</Text>
