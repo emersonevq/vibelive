@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text, FlatList, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
 
-type Props = {
-  chatId: string;
-  onNavigate: (to: 'Login' | 'SignUp' | 'Home' | 'Chat', params?: { chatId?: string }) => void;
-};
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../navigation/RootNavigator';
 
-export default function ChatScreen({ chatId, onNavigate }: Props) {
+type Props = NativeStackScreenProps<RootStackParamList, 'Chat'>;
+
+export default function ChatScreen({ route }: Props) {
+  const chatId = route.params?.chatId ?? 'unknown';
   const [messages, setMessages] = useState<{ id: string; text: string; fromMe?: boolean }[]>([
     { id: 'm1', text: 'Mensagem de exemplo', fromMe: false },
   ]);
