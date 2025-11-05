@@ -2,9 +2,9 @@ import React from 'react';
 import { View, FlatList, TouchableOpacity, Image, StyleSheet } from 'react-native';
 
 const SAMPLE_STICKERS = [
-  require('../../assets/sticker1.png'),
-  require('../../assets/sticker2.png'),
-  require('../../assets/sticker3.png'),
+  'https://cdn-icons-png.flaticon.com/512/2917/2917242.png',
+  'https://cdn-icons-png.flaticon.com/512/2907/2907264.png',
+  'https://cdn-icons-png.flaticon.com/512/197/197564.png',
 ];
 
 type Props = { onAddSticker?: (uri: string) => void };
@@ -15,10 +15,10 @@ export default function StickersTool({ onAddSticker }: Props) {
       <FlatList
         data={SAMPLE_STICKERS}
         horizontal
-        keyExtractor={(_, i) => String(i)}
+        keyExtractor={(item, i) => String(i)}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => onAddSticker && onAddSticker(Image.resolveAssetSource(item).uri)} style={styles.item}>
-            <Image source={item} style={styles.image} />
+          <TouchableOpacity onPress={() => onAddSticker && onAddSticker(item)} style={styles.item}>
+            <Image source={{ uri: item }} style={styles.image} />
           </TouchableOpacity>
         )}
       />
