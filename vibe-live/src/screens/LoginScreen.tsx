@@ -78,17 +78,6 @@ export default function LoginScreen() {
 
         <PrimaryButton title="Entrar" onPress={handleLogin} />
 
-        <View style={styles.divider}>
-          <View style={styles.dividerLine} />
-          <Text style={styles.dividerText}>ou</Text>
-          <View style={styles.dividerLine} />
-        </View>
-
-        <TouchableOpacity style={styles.socialButton}>
-          <MaterialIcon name="google" size={20} color="#EA4335" />
-          <Text style={styles.socialButtonText}>Entrar com Google</Text>
-        </TouchableOpacity>
-
         <View style={styles.row}>
           <Text style={styles.text}>Não tem conta?</Text>
           <TouchableOpacity onPress={() => navigation.navigate('SignUp' as any)}>
