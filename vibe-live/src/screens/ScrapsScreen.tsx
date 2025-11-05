@@ -14,8 +14,8 @@ type Scrap = {
 const ONE_HOUR = 60 * 60 * 1000;
 
 const initial: Scrap[] = [
-  { id: 's1', text: 'Alguém vem tomar um café?', createdAt: Date.now() - 20 * 60 * 1000, author: 'Ana' },
-  { id: 's2', text: 'Boa ideia: meetup hoje 18h', createdAt: Date.now() - 70 * 60 * 1000, author: 'Carlos' },
+  { id: 's1', text: 'Alguém vem tomar um café? ☕', createdAt: Date.now() - 20 * 60 * 1000, author: 'Ana' },
+  { id: 's2', text: 'Boa ideia: meetup hoje 18h 🚀', createdAt: Date.now() - 70 * 60 * 1000, author: 'Carlos' },
   { id: 's3', text: 'Vendas batendo meta! 🎉', createdAt: Date.now() - 5 * 60 * 1000, author: 'Pedro' },
 ];
 
@@ -42,15 +42,37 @@ export default function ScrapsScreen() {
     setText('');
   };
 
+  const getTimeRemaining = (createdAt: number) => {
+    const remaining = ONE_HOUR - (Date.now() - createdAt);
+    const minutes = Math.floor(remaining / (60 * 1000));
+    return `${minutes}min restantes`;
+  };
+
   return (
     <SafeAreaView style={styles.container}>
+      {/* Header moderno */}
       <View style={styles.header}>
-        <MaterialCommunityIcons name="file-document" size={24} color="#16a34a" />
-        <Text style={styles.title}>Scraps Rápidos</Text>
+        <View style={styles.headerLeft}>
+          <View style={styles.headerIconContainer}>
+            <MaterialCommunityIcons name="file-document" size={24} color="#16a34a" />
+          </View>
+          <View>
+            <Text style={styles.title}>Scraps Rápidos</Text>
+            <Text style={styles.subtitle}>Mensagens que desaparecem em 1h</Text>
+          </View>
+        </View>
+        <View style={styles.headerStats}>
+          <Text style={styles.statsNumber}>{visible.length}</Text>
+          <Text style={styles.statsLabel}>ativos</Text>
+        </View>
       </View>
 
+      {/* Composer melhorado */}
       <View style={styles.composerCard}>
-        <Text style={styles.composerLabel}>Compartilhe uma mensagem rápida (expira em 1h)</Text>
+        <View style={styles.composerHeader}>
+          <MaterialCommunityIcons name="plus-circle" size={20} color="#16a34a" />
+          <Text style={styles.composerLabel}>Compartilhar mensagem rápida</Text>
+        </View>
         <View style={styles.composer}>
           <TextInput
             value={text}
@@ -59,25 +81,37 @@ export default function ScrapsScreen() {
             style={styles.input}
             placeholderTextColor="#9ca3af"
             multiline
-            maxHeight={80}
+            maxHeight={100}
           />
-          <TouchableOpacity style={[styles.button, { marginLeft: 8 }]} onPress={add}>
-            <MaterialCommunityIcons name="send" size={20} color="#fff" />
+          <TouchableOpacity 
+            style={[styles.sendButton, { opacity: text.trim() ? 1 : 0.5 }]} 
+            onPress={add}
+            disabled={!text.trim()}
+          >
+            <MaterialCommunityIcons name="send" size={18} color="#fff" />
           </TouchableOpacity>
         </View>
       </View>
 
+      {/* Lista de scraps ou estado vazio */}
       {visible.length === 0 ? (
         <View style={styles.empty}>
-          <MaterialCommunityIcons name="inbox-multiple" size={64} color="#d1d5db" />
+          <View style={styles.emptyIconContainer}>
+            <MaterialCommunityIcons name="inbox-multiple" size={64} color="#16a34a" />
+          </View>
           <Text style={styles.emptyText}>Nenhum scrap ativo</Text>
-          <Text style={styles.emptySubtext}>Scraps desaparecem após 1 hora</Text>
+          <Text style={styles.emptySubtext}>Scraps desaparecem após 1 hora automaticamente</Text>
+          <TouchableOpacity style={styles.emptyButton} onPress={() => setText('Olá pessoal! 👋')}>
+            <MaterialCommunityIcons name="plus" size={16} color="#16a34a" />
+            <Text style={styles.emptyButtonText}>Criar primeiro scrap</Text>
+          </TouchableOpacity>
         </View>
       ) : (
         <FlatList
           data={Array.isArray(visible) ? visible : []}
           keyExtractor={(i) => i.id}
           contentContainerStyle={styles.listContent}
+          showsVerticalScrollIndicator={false}
           renderItem={({ item }) => (
             <View style={styles.card}>
               <View style={styles.cardHeader}>
@@ -87,12 +121,31 @@ export default function ScrapsScreen() {
                 <View style={styles.cardMeta}>
                   <Text style={styles.cardAuthor}>{item.author}</Text>
                   <View style={styles.timeRow}>
-                    <MaterialCommunityIcons name="clock-outline" size={12} color="#9ca3af" />
+                    <MaterialCommunityIcons name="clock-outline" size={12} color="#16a34a" />
                     <Text style={styles.cardTime}> {new Date(item.createdAt).toLocaleTimeString()}</Text>
+                    <Text style={styles.timeRemaining}> • {getTimeRemaining(item.createdAt)}</Text>
                   </View>
+                </View>
+                <View style={styles.cardActions}>
+                  <TouchableOpacity style={styles.actionButton}>
+                    <MaterialCommunityIcons name="heart-outline" size={16} color="#16a34a" />
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.actionButton}>
+                    <MaterialCommunityIcons name="share-variant" size={16} color="#16a34a" />
+                  </TouchableOpacity>
                 </View>
               </View>
               <Text style={styles.cardText}>{item.text}</Text>
+
+              {/* Barra de progresso do tempo */}
+              <View style={styles.progressContainer}>
+                <View 
+                  style={[
+                    styles.progressBar, 
+                    { width: `${((ONE_HOUR - (Date.now() - item.createdAt)) / ONE_HOUR) * 100}%` }
+                  ]} 
+                />
+              </View>
             </View>
           )}
         />
@@ -103,24 +156,244 @@ export default function ScrapsScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#f8fafc' },
-  header: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#fff', paddingHorizontal: 16, paddingVertical: 14, borderBottomWidth: 1, borderBottomColor: '#e5e7eb' },
-  title: { fontSize: 20, fontWeight: '700', color: '#111827', marginLeft: 10 },
-  composerCard: { backgroundColor: '#fff', margin: 12, padding: 16, borderRadius: 12, elevation: 2, shadowColor: '#000', shadowOpacity: 0.05, shadowRadius: 4, shadowOffset: { width: 0, height: 2 } },
-  composerLabel: { fontSize: 13, fontWeight: '600', color: '#6b7280', marginBottom: 12 },
-  composer: { flexDirection: 'row', alignItems: 'flex-end' },
-  input: { flex: 1, backgroundColor: '#f9fafb', borderRadius: 12, paddingHorizontal: 14, paddingVertical: 10, fontSize: 14, color: '#111827', borderWidth: 1, borderColor: '#e5e7eb', maxHeight: 80 },
-  button: { backgroundColor: '#16a34a', width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center' },
-  empty: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 40 },
-  emptyText: { fontSize: 16, color: '#6b7280', fontWeight: '600', marginTop: 12 },
-  emptySubtext: { fontSize: 13, color: '#9ca3af', marginTop: 4, textAlign: 'center' },
-  listContent: { padding: 12 },
-  card: { backgroundColor: '#fff', padding: 14, borderRadius: 12, marginBottom: 10, elevation: 1, shadowColor: '#000', shadowOpacity: 0.04, shadowRadius: 3, shadowOffset: { width: 0, height: 1 } },
-  cardHeader: { flexDirection: 'row', alignItems: 'center', marginBottom: 12 },
-  authorAvatar: { width: 40, height: 40, borderRadius: 20, backgroundColor: '#dcfce7', alignItems: 'center', justifyContent: 'center', marginRight: 12 },
-  authorInitial: { color: '#16a34a', fontWeight: '700', fontSize: 14 },
-  cardMeta: { flex: 1 },
-  cardAuthor: { fontWeight: '700', fontSize: 14, color: '#111827' },
-  timeRow: { flexDirection: 'row', alignItems: 'center', marginTop: 2 },
-  cardTime: { color: '#9ca3af', fontSize: 12 },
-  cardText: { fontSize: 14, color: '#374151', lineHeight: 20 },
+  
+  // Header
+  header: { 
+    flexDirection: 'row', 
+    alignItems: 'center', 
+    justifyContent: 'space-between',
+    backgroundColor: '#fff', 
+    paddingHorizontal: 16, 
+    paddingVertical: 16, 
+    borderBottomWidth: 1, 
+    borderBottomColor: '#e5e7eb',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  headerLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
+  },
+  headerIconContainer: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#dcfce7',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 12,
+  },
+  title: { fontSize: 18, fontWeight: '700', color: '#111827' },
+  subtitle: { fontSize: 12, color: '#6b7280', marginTop: 2 },
+  headerStats: {
+    alignItems: 'center',
+    backgroundColor: '#dcfce7',
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 12,
+  },
+  statsNumber: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: '#16a34a',
+  },
+  statsLabel: {
+    fontSize: 10,
+    color: '#16a34a',
+    fontWeight: '500',
+  },
+
+  // Composer
+  composerCard: { 
+    backgroundColor: '#fff', 
+    margin: 16, 
+    borderRadius: 16, 
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 3,
+  },
+  composerHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#f3f4f6',
+  },
+  composerLabel: { 
+    fontSize: 14, 
+    fontWeight: '600', 
+    color: '#111827', 
+    marginLeft: 8 
+  },
+  composer: { 
+    flexDirection: 'row', 
+    alignItems: 'flex-end',
+    padding: 16,
+    gap: 12,
+  },
+  input: { 
+    flex: 1, 
+    backgroundColor: '#f9fafb', 
+    borderRadius: 16, 
+    paddingHorizontal: 16, 
+    paddingVertical: 12, 
+    fontSize: 15, 
+    color: '#111827', 
+    borderWidth: 1, 
+    borderColor: '#e5e7eb', 
+    maxHeight: 100,
+    minHeight: 44,
+  },
+  sendButton: { 
+    backgroundColor: '#16a34a', 
+    width: 44, 
+    height: 44, 
+    borderRadius: 22, 
+    alignItems: 'center', 
+    justifyContent: 'center',
+    shadowColor: '#16a34a',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 4,
+  },
+
+  // Empty State
+  empty: { 
+    flex: 1, 
+    alignItems: 'center', 
+    justifyContent: 'center', 
+    padding: 40 
+  },
+  emptyIconContainer: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    backgroundColor: '#dcfce7',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 20,
+  },
+  emptyText: { 
+    fontSize: 18, 
+    color: '#111827', 
+    fontWeight: '700', 
+    marginBottom: 8 
+  },
+  emptySubtext: { 
+    fontSize: 14, 
+    color: '#6b7280', 
+    textAlign: 'center',
+    marginBottom: 24,
+    lineHeight: 20,
+  },
+  emptyButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#dcfce7',
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    borderRadius: 20,
+  },
+  emptyButtonText: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#16a34a',
+    marginLeft: 6,
+  },
+
+  // List
+  listContent: { 
+    padding: 16,
+    paddingBottom: 32,
+  },
+  card: { 
+    backgroundColor: '#fff', 
+    padding: 16, 
+    borderRadius: 16, 
+    marginBottom: 12, 
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 3,
+  },
+  cardHeader: { 
+    flexDirection: 'row', 
+    alignItems: 'center', 
+    marginBottom: 12 
+  },
+  authorAvatar: { 
+    width: 40, 
+    height: 40, 
+    borderRadius: 20, 
+    backgroundColor: '#dcfce7', 
+    alignItems: 'center', 
+    justifyContent: 'center', 
+    marginRight: 12 
+  },
+  authorInitial: { 
+    color: '#16a34a', 
+    fontWeight: '700', 
+    fontSize: 16 
+  },
+  cardMeta: { 
+    flex: 1 
+  },
+  cardAuthor: { 
+    fontWeight: '700', 
+    fontSize: 15, 
+    color: '#111827' 
+  },
+  timeRow: { 
+    flexDirection: 'row', 
+    alignItems: 'center', 
+    marginTop: 2 
+  },
+  cardTime: { 
+    color: '#6b7280', 
+    fontSize: 12 
+  },
+  timeRemaining: {
+    color: '#16a34a',
+    fontSize: 12,
+    fontWeight: '500',
+  },
+  cardActions: {
+    flexDirection: 'row',
+    gap: 8,
+  },
+  actionButton: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: '#dcfce7',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  cardText: { 
+    fontSize: 15, 
+    color: '#374151', 
+    lineHeight: 22,
+    marginBottom: 12,
+  },
+  
+  // Progress Bar
+  progressContainer: {
+    height: 3,
+    backgroundColor: '#f3f4f6',
+    borderRadius: 2,
+    overflow: 'hidden',
+  },
+  progressBar: {
+    height: '100%',
+    backgroundColor: '#16a34a',
+    borderRadius: 2,
+  },
 });
