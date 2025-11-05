@@ -339,6 +339,7 @@ export default function StoryEditor({ initialBackground, onClose, onPublish }: P
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#000' },
+  captureArea: { flex: 1 },
   bgFill: { ...StyleSheet.absoluteFillObject },
   drawLayer: { ...StyleSheet.absoluteFillObject },
   topBar: { position: 'absolute', top: 12, left: 12, right: 12, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
