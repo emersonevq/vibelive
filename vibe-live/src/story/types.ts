@@ -38,10 +38,52 @@ export type Privacy =
   | 'amigos_exceto'
   | 'apenas';
 
+export type StickerItem = {
+  id: string;
+  kind: 'emoji' | 'gif' | 'label' | 'location';
+  text?: string;
+  uri?: string;
+  x: number;
+  y: number;
+  rotation: number;
+  scale: number;
+};
+
+export type TagItem = {
+  id: string;
+  username: string;
+  x: number;
+  y: number;
+  rotation: number;
+  scale: number;
+};
+
+export type FilterType =
+  | 'original'
+  | 'vintage'
+  | 'bw'
+  | 'sepia'
+  | 'vibrant'
+  | 'cool'
+  | 'warm'
+  | 'faded'
+  | 'dramatic'
+  | 'retro';
+
+export type Transform = {
+  rotate: 0 | 90 | 180 | 270;
+  flipH: boolean;
+  flipV: boolean;
+};
+
 export type StoryComposition = {
   background: Background;
   texts: TextItem[];
   strokes: Stroke[];
+  stickers?: StickerItem[];
+  tags?: TagItem[];
+  filter?: FilterType;
+  transform?: Transform;
   privacy: Privacy;
   allowShare: boolean;
   allowReplies: boolean;
