@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import MaterialIcon from '../components/MaterialIcon';
+import MaterialCommunityIcons from '../components/MaterialCommunityIcons';
 
 export default function ProfileScreen() {
   return (
@@ -12,7 +12,7 @@ export default function ProfileScreen() {
           <View style={styles.avatarContainer}>
             <Image source={{ uri: 'https://randomuser.me/api/portraits/men/75.jpg' }} style={styles.avatar} />
             <View style={styles.editBadge}>
-              <MaterialIcon name="pencil" size={16} color="#fff" />
+              <MaterialCommunityIcons name="pencil" size={16} color="#fff" />
             </View>
           </View>
         </View>
@@ -20,7 +20,7 @@ export default function ProfileScreen() {
         <View style={styles.profileInfo}>
           <Text style={styles.name}>Usuário Visitante</Text>
           <View style={styles.statusRow}>
-            <MaterialIcon name="music" size={14} color="#16a34a" />
+            <MaterialCommunityIcons name="music" size={14} color="#16a34a" />
             <Text style={styles.status}> Ouvindo: Nothing for now</Text>
           </View>
         </View>
@@ -44,7 +44,7 @@ export default function ProfileScreen() {
 
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <MaterialIcon name="information" size={22} color="#16a34a" />
+            <MaterialCommunityIcons name="information" size={22} color="#16a34a" />
             <Text style={styles.sectionTitle}>Sobre</Text>
           </View>
           <Text style={styles.sectionText}>Perfil mockado para demonstração do aplicativo Live Messenger.</Text>
@@ -52,62 +52,62 @@ export default function ProfileScreen() {
 
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <MaterialIcon name="cog" size={22} color="#16a34a" />
+            <MaterialCommunityIcons name="cog" size={22} color="#16a34a" />
             <Text style={styles.sectionTitle}>Configurações</Text>
           </View>
           <TouchableOpacity style={styles.option}>
             <View style={styles.optionLeft}>
-              <MaterialIcon name="account-edit" size={20} color="#16a34a" style={styles.optionIcon} />
+              <MaterialCommunityIcons name="account-edit" size={20} color="#16a34a" style={styles.optionIcon} />
               <Text style={styles.optionText}>Editar perfil</Text>
             </View>
-            <MaterialIcon name="chevron-right" size={24} color="#9ca3af" />
+            <MaterialCommunityIcons name="chevron-right" size={24} color="#9ca3af" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.option}>
             <View style={styles.optionLeft}>
-              <MaterialIcon name="shield-account" size={20} color="#16a34a" style={styles.optionIcon} />
+              <MaterialCommunityIcons name="shield-account" size={20} color="#16a34a" style={styles.optionIcon} />
               <Text style={styles.optionText}>Privacidade</Text>
             </View>
-            <MaterialIcon name="chevron-right" size={24} color="#9ca3af" />
+            <MaterialCommunityIcons name="chevron-right" size={24} color="#9ca3af" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.option}>
             <View style={styles.optionLeft}>
-              <MaterialIcon name="bell" size={20} color="#16a34a" style={styles.optionIcon} />
+              <MaterialCommunityIcons name="bell" size={20} color="#16a34a" style={styles.optionIcon} />
               <Text style={styles.optionText}>Notificações</Text>
             </View>
-            <MaterialIcon name="chevron-right" size={24} color="#9ca3af" />
+            <MaterialCommunityIcons name="chevron-right" size={24} color="#9ca3af" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.option}>
             <View style={styles.optionLeft}>
-              <MaterialIcon name="palette" size={20} color="#16a34a" style={styles.optionIcon} />
+              <MaterialCommunityIcons name="palette" size={20} color="#16a34a" style={styles.optionIcon} />
               <Text style={styles.optionText}>Tema</Text>
             </View>
-            <MaterialIcon name="chevron-right" size={24} color="#9ca3af" />
+            <MaterialCommunityIcons name="chevron-right" size={24} color="#9ca3af" />
           </TouchableOpacity>
         </View>
 
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <MaterialIcon name="help-circle" size={22} color="#16a34a" />
+            <MaterialCommunityIcons name="help-circle" size={22} color="#16a34a" />
             <Text style={styles.sectionTitle}>Suporte</Text>
           </View>
           <TouchableOpacity style={styles.option}>
             <View style={styles.optionLeft}>
-              <MaterialIcon name="frequently-asked-questions" size={20} color="#16a34a" style={styles.optionIcon} />
+              <MaterialCommunityIcons name="frequently-asked-questions" size={20} color="#16a34a" style={styles.optionIcon} />
               <Text style={styles.optionText}>Ajuda e FAQ</Text>
             </View>
-            <MaterialIcon name="chevron-right" size={24} color="#9ca3af" />
+            <MaterialCommunityIcons name="chevron-right" size={24} color="#9ca3af" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.option}>
             <View style={styles.optionLeft}>
-              <MaterialIcon name="bug" size={20} color="#16a34a" style={styles.optionIcon} />
+              <MaterialCommunityIcons name="bug" size={20} color="#16a34a" style={styles.optionIcon} />
               <Text style={styles.optionText}>Reportar problema</Text>
             </View>
-            <MaterialIcon name="chevron-right" size={24} color="#9ca3af" />
+            <MaterialCommunityIcons name="chevron-right" size={24} color="#9ca3af" />
           </TouchableOpacity>
         </View>
 
         <TouchableOpacity style={styles.logoutButton}>
-          <MaterialIcon name="logout" size={20} color="#ef4444" />
+          <MaterialCommunityIcons name="logout" size={20} color="#ef4444" />
           <Text style={styles.logoutText}>Sair</Text>
         </TouchableOpacity>
       </ScrollView>
