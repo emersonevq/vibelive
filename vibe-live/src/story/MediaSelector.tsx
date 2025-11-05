@@ -63,9 +63,12 @@ export default function MediaSelector({ onSelect, onCancel }: Props) {
             if (result.canceled) return;
             const asset = result.assets?.[0];
             if (!asset) return;
+            const size = (asset as any).fileSize as number | undefined;
             if (asset.type === 'video') {
+              if (size && size > 100 * 1024 * 1024) { Alert.alert('Arquivo muito grande', 'Vídeos até 100MB.'); return; }
               onSelect({ type: 'video', uri: asset.uri, duration: (asset as any).duration });
             } else {
+              if (size && size > 50 * 1024 * 1024) { Alert.alert('Arquivo muito grande', 'Fotos até 50MB.'); return; }
               onSelect({ type: 'image', uri: asset.uri });
             }
           }}
