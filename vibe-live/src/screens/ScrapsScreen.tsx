@@ -52,16 +52,16 @@ export default function ScrapsScreen() {
       <View style={styles.composerCard}>
         <Text style={styles.composerLabel}>Compartilhe uma mensagem rápida (expira em 1h)</Text>
         <View style={styles.composer}>
-          <TextInput 
-            value={text} 
-            onChangeText={setText} 
-            placeholder="Escreva um recado..." 
-            style={styles.input} 
+          <TextInput
+            value={text}
+            onChangeText={setText}
+            placeholder="Escreva um recado..."
+            style={styles.input}
             placeholderTextColor="#9ca3af"
             multiline
             maxHeight={80}
           />
-          <TouchableOpacity style={styles.button} onPress={add}>
+          <TouchableOpacity style={[styles.button, { marginLeft: 8 }]} onPress={add}>
             <MaterialIcon name="send" size={20} color="#fff" />
           </TouchableOpacity>
         </View>
