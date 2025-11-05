@@ -41,7 +41,7 @@ export default function StoryEditor({
 
   const handleAddText = () => {
     if (textInput.trim()) {
-      const newElement: StoryElement = {
+      const newElement: TextElement = {
         id: `text-${Date.now()}`,
         type: 'text',
         text: textInput,
@@ -54,10 +54,32 @@ export default function StoryEditor({
         hasOutline: false,
         align: 'center',
       };
-      setElements([...elements, newElement]);
+      setSelectedText(newElement);
       setTextInput('');
       setTextModalVisible(false);
+      setTextEditorVisible(true);
     }
+  };
+
+  const handleEditText = (textElement: TextElement) => {
+    setSelectedText(textElement);
+    setTextEditorVisible(true);
+  };
+
+  const handleConfirmTextEdit = (editedText: TextElement) => {
+    const updatedElements = elements.map((el) =>
+      el.id === editedText.id ? editedText : el
+    );
+    if (!elements.some((el) => el.id === editedText.id)) {
+      updatedElements.push(editedText);
+    }
+    setElements(updatedElements);
+    setTextEditorVisible(false);
+    setSelectedText(null);
+  };
+
+  const handleDeleteText = (textId: string) => {
+    setElements(elements.filter((el) => el.id !== textId));
   };
 
   const handlePublish = () => {
