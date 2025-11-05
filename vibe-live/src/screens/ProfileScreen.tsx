@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
   coverImage: { width: '100%', height: 160, resizeMode: 'cover', opacity: 0.2 },
   avatarContainer: { position: 'absolute', bottom: -40, left: '50%', marginLeft: -50 },
   avatar: { width: 100, height: 100, borderRadius: 50, borderWidth: 4, borderColor: '#fff' },
-  editBadge: { position: 'absolute', bottom: 0, right: 0, width: 36, height: 36, borderRadius: 18, backgroundColor: '#2563EB', alignItems: 'center', justifyContent: 'center', borderWidth: 2, borderColor: '#fff' },
+  editBadge: { position: 'absolute', bottom: 0, right: 0, width: 36, height: 36, borderRadius: 18, backgroundColor: '#16a34a', alignItems: 'center', justifyContent: 'center', borderWidth: 2, borderColor: '#fff' },
   profileInfo: { alignItems: 'center', paddingHorizontal: 16, paddingBottom: 16, backgroundColor: '#fff' },
   name: { fontSize: 22, fontWeight: '700', color: '#111827', marginBottom: 8 },
   statusRow: { flexDirection: 'row', alignItems: 'center' },
