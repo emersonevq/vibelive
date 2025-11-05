@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, Modal, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import StoryCreator from '../story/StoryCreator';
+import type { StoryComposition } from '../story/types';
 
-const STORIES = [
+type StoryItem = { id: string; name: string; avatarUrl?: string; hasStory: boolean; time: string; composition?: StoryComposition };
+
+const STORIES: StoryItem[] = [
   { id: '1', name: 'Ana Silva', avatarUrl: 'https://randomuser.me/api/portraits/women/65.jpg', hasStory: true, time: 'há 2 horas' },
   { id: '2', name: 'Julia Oliveira', avatarUrl: 'https://randomuser.me/api/portraits/women/68.jpg', hasStory: true, time: 'há 1 hora' },
   { id: '3', name: 'Mariana Costa', avatarUrl: 'https://randomuser.me/api/portraits/women/44.jpg', hasStory: true, time: 'há 3 horas' },
@@ -13,33 +17,30 @@ const STORIES = [
 
 export default function StoryScreen() {
   const [selectedStory, setSelectedStory] = useState<string | null>(null);
-  const [storyIndex, setStoryIndex] = useState(0);
+  const [creatorOpen, setCreatorOpen] = useState(false);
 
-  const currentStory = selectedStory ? STORIES.find(s => s.id === selectedStory) : null;
-  const activeStories = STORIES.filter(s => s.hasStory);
+  const [stories, setStories] = useState<StoryItem[]>(STORIES);
+  const currentStory = selectedStory ? stories.find(s => s.id === selectedStory) : null;
+  const activeStories = useMemo(() => stories.filter(s => s.hasStory), [stories]);
 
   const handleNextStory = () => {
-    const currentIdx = STORIES.findIndex(s => s.id === selectedStory);
-    if (currentIdx < STORIES.length - 1) {
-      setSelectedStory(STORIES[currentIdx + 1].id);
+    const idx = stories.findIndex(s => s.id === selectedStory);
+    if (idx < stories.length - 1) {
+      setSelectedStory(stories[idx + 1].id);
     } else {
       setSelectedStory(null);
     }
   };
 
   const handlePrevStory = () => {
-    const currentIdx = STORIES.findIndex(s => s.id === selectedStory);
-    if (currentIdx > 0) {
-      setSelectedStory(STORIES[currentIdx - 1].id);
+    const idx = stories.findIndex(s => s.id === selectedStory);
+    if (idx > 0) {
+      setSelectedStory(stories[idx - 1].id);
     }
   };
 
   const handleAddStory = () => {
-    Alert.alert('Adicionar Story', 'Selecione uma opção para criar seu story', [
-      { text: 'Câmera', onPress: () => Alert.alert('Câmera', 'Abrir câmera') },
-      { text: 'Galeria', onPress: () => Alert.alert('Galeria', 'Abrir galeria') },
-      { text: 'Cancelar', onPress: () => {} },
-    ]);
+    setCreatorOpen(true);
   };
 
   return (
@@ -77,7 +78,7 @@ export default function StoryScreen() {
         </TouchableOpacity>
 
         {/* Stories dos contatos */}
-        {Array.isArray(STORIES) && STORIES.map((story) => (
+        {Array.isArray(stories) && stories.map((story) => (
           <TouchableOpacity 
             key={story.id} 
             style={styles.storyCard}
@@ -121,17 +122,17 @@ export default function StoryScreen() {
             <View style={styles.storyModal}>
               {/* Barra de progresso */}
               <View style={styles.storyProgressBar}>
-                {Array.isArray(STORIES) && STORIES.map((story, idx) => (
+                {Array.isArray(stories) && stories.map((story, idx) => (
                   <View
                     key={story.id}
                     style={[
                       styles.progressSegment,
-                      idx < STORIES.findIndex(s => s.id === selectedStory)
+                      idx < stories.findIndex(s => s.id === selectedStory)
                         ? styles.progressSegmentFilled
-                        : idx === STORIES.findIndex(s => s.id === selectedStory)
+                        : idx === stories.findIndex(s => s.id === selectedStory)
                         ? styles.progressSegmentActive
                         : styles.progressSegmentEmpty,
-                      idx < STORIES.length - 1 && { marginRight: 4 },
+                      idx < stories.length - 1 && { marginRight: 4 },
                     ]}
                   />
                 ))}
@@ -154,11 +155,21 @@ export default function StoryScreen() {
                 </TouchableOpacity>
               </View>
 
-              {/* Imagem do story */}
-              <Image 
-                source={{ uri: currentStory?.avatarUrl }} 
-                style={styles.storyFullImage} 
-              />
+              {/* Conteúdo do story */}
+              {currentStory?.composition ? (
+                <View style={[styles.storyFullImage, { backgroundColor: currentStory.composition.background.type === 'color' ? currentStory.composition.background.color : '#000' }]}>
+                  {currentStory.composition.texts.map((t) => (
+                    <Text key={t.id} style={{ position: 'absolute', left: `${t.x * 100}%`, top: `${t.y * 100}%`, color: t.color, fontSize: t.fontSize, fontFamily: t.fontFamily, transform: [{ rotate: `${t.rotation}deg` }, { scale: t.scale }] }}>
+                      {t.text}
+                    </Text>
+                  ))}
+                </View>
+              ) : (
+                <Image
+                  source={{ uri: currentStory?.avatarUrl }}
+                  style={styles.storyFullImage}
+                />
+              )}
 
               {/* Footer do visualizador */}
               <View style={styles.storyViewerFooter}>
@@ -216,6 +227,15 @@ export default function StoryScreen() {
           </View>
         </View>
       </View>
+      <StoryCreator
+        visible={creatorOpen}
+        onClose={() => setCreatorOpen(false)}
+        onPublish={(comp) => {
+          const me: StoryItem = { id: 'me', name: 'Você', avatarUrl: undefined, hasStory: true, time: 'agora', composition: comp };
+          setStories((s) => [me, ...s]);
+          setSelectedStory('me');
+        }}
+      />
     </SafeAreaView>
   );
 }
