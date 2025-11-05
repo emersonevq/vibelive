@@ -31,7 +31,7 @@ export default function LoginScreen() {
     >
       <View style={styles.headerSection}>
         <View style={styles.iconCircle}>
-          <MaterialIcon name="chat-bubble" size={48} color="#fff" />
+          <MaterialIcon name="chat" size={48} color="#fff" />
         </View>
         <Text style={styles.title}>Vibe</Text>
         <Text style={styles.subtitle}>Live Messenger</Text>
