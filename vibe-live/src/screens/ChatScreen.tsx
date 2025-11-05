@@ -77,10 +77,10 @@ export default function ChatScreen({ route, navigation }: Props) {
         <View style={[styles.inputContainer, { paddingBottom: Math.max(insets.bottom, 8) }]}>
           <View style={styles.inputRow}>
             <TouchableOpacity style={styles.attachBtn}>
-              <MaterialIcon name="paperclip" size={22} color="#2563EB" />
+              <MaterialIcon name="paperclip" size={22} color="#16a34a" />
             </TouchableOpacity>
             <TouchableOpacity style={styles.attachBtn}>
-              <MaterialIcon name="image-plus" size={22} color="#2563EB" />
+              <MaterialIcon name="image-plus" size={22} color="#16a34a" />
             </TouchableOpacity>
             <TextInput
               value={text}
