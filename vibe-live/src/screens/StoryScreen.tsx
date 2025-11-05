@@ -136,13 +136,13 @@ export default function StoryScreen() {
                 </TouchableOpacity>
 
                 <View style={styles.storyActions}>
-                  <TouchableOpacity style={styles.storyFooterButton}>
+                  <TouchableOpacity style={[styles.storyFooterButton, { marginHorizontal: 4 }]}>
                     <MaterialIcon name="heart-outline" size={24} color="#fff" />
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.storyFooterButton}>
+                  <TouchableOpacity style={[styles.storyFooterButton, { marginHorizontal: 4 }]}>
                     <MaterialIcon name="send" size={24} color="#fff" />
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.storyFooterButton}>
+                  <TouchableOpacity style={[styles.storyFooterButton, { marginHorizontal: 4 }]}>
                     <MaterialIcon name="share-variant" size={24} color="#fff" />
                   </TouchableOpacity>
                 </View>
