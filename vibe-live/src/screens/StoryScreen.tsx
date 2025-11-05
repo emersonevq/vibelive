@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import StoryCreator from '../story/StoryCreator';
 import type { StoryComposition } from '../story/types';
+import { Video } from 'expo-av';
 
 type StoryItem = { id: string; name: string; avatarUrl?: string; hasStory: boolean; time: string; composition?: StoryComposition };
 
