@@ -8,6 +8,7 @@ import { RootStackParamList } from '../navigation/RootNavigator';
 type Props = NativeStackScreenProps<RootStackParamList, 'Chat'>;
 
 export default function ChatScreen({ route, navigation }: Props) {
+  const insets = useSafeAreaInsets();
   const chatId = route.params?.chatId ?? 'unknown';
   const chatName = route.params?.name ?? 'Contato';
   const avatarUrl = route.params?.avatarUrl;
@@ -25,56 +26,58 @@ export default function ChatScreen({ route, navigation }: Props) {
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior={Platform.select({ ios: 'padding', android: undefined })}>
-      <View style={styles.headerWrap}>
-        <View style={styles.headerCard}>
-          <TouchableOpacity onPress={() => navigation.goBack()} style={styles.back}>
-            <Text style={{fontSize:18}}>←</Text>
-          </TouchableOpacity>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+      <KeyboardAvoidingView style={[styles.container, { paddingTop: insets.top }]} behavior={Platform.select({ ios: 'padding', android: undefined })}>
+        <View style={styles.headerWrap}>
+          <View style={styles.headerCard}>
+            <TouchableOpacity onPress={() => navigation.goBack()} style={styles.back}>
+              <Text style={{fontSize:18}}>←</Text>
+            </TouchableOpacity>
 
-          <View style={styles.headerMeta}>
-            {avatarUrl ? (
-              <Image source={{ uri: avatarUrl }} style={styles.avatarImage} />
-            ) : (
-              <View style={styles.avatar}><Text style={styles.avatarText}>{'AS'}</Text></View>
-            )}
-            <View>
-              <Text style={styles.headerTitle}>{chatName}</Text>
-              <Text style={styles.headerStatus}>Estudando para as provas! • Online</Text>
+            <View style={styles.headerMeta}>
+              {avatarUrl ? (
+                <Image source={{ uri: avatarUrl }} style={styles.avatarImage} />
+              ) : (
+                <View style={styles.avatar}><Text style={styles.avatarText}>{'AS'}</Text></View>
+              )}
+              <View>
+                <Text style={styles.headerTitle}>{chatName}</Text>
+                <Text style={styles.headerStatus}>Estudando para as provas! • Online</Text>
+              </View>
             </View>
-          </View>
 
-          <View style={styles.headerActions}>
-            <Text style={styles.icon}>📞</Text>
-            <Text style={[styles.icon, {marginLeft:10}]}>🎥</Text>
-            <Text style={[styles.icon, {marginLeft:10}]}>⋮</Text>
+            <View style={styles.headerActions}>
+              <Text style={styles.icon}>📞</Text>
+              <Text style={[styles.icon, {marginLeft:10}]}>🎥</Text>
+              <Text style={[styles.icon, {marginLeft:10}]}>⋮</Text>
+            </View>
           </View>
         </View>
-      </View>
 
-      <FlatList
-        data={messages}
-        keyExtractor={(m) => m.id}
-        renderItem={({ item }) => (
-          <View style={[styles.bubbleWrap, item.fromMe ? { alignItems: 'flex-end' } : { alignItems: 'flex-start' }]}>
-            <View style={[styles.bubble, item.fromMe ? styles.bubbleRight : styles.bubbleLeft]}>
-              <Text style={[styles.bubbleText, item.fromMe ? styles.bubbleTextRight : styles.bubbleTextLeft]}>{item.text}</Text>
-              <Text style={[styles.time, item.fromMe ? styles.timeRight : styles.timeLeft]}>{item.time}</Text>
+        <FlatList
+          data={messages}
+          keyExtractor={(m) => m.id}
+          renderItem={({ item }) => (
+            <View style={[styles.bubbleWrap, item.fromMe ? { alignItems: 'flex-end' } : { alignItems: 'flex-start' }]}>
+              <View style={[styles.bubble, item.fromMe ? styles.bubbleRight : styles.bubbleLeft]}>
+                <Text style={[styles.bubbleText, item.fromMe ? styles.bubbleTextRight : styles.bubbleTextLeft]}>{item.text}</Text>
+                <Text style={[styles.time, item.fromMe ? styles.timeRight : styles.timeLeft]}>{item.time}</Text>
+              </View>
             </View>
-          </View>
-        )}
-        contentContainerStyle={{ padding: 12, paddingBottom: 80 }}
-      />
+          )}
+          contentContainerStyle={{ padding: 12, paddingBottom: 80 + insets.bottom }}
+        />
 
-      <View style={styles.composer}>
-        <TouchableOpacity style={styles.iconBtn}><Text>📎</Text></TouchableOpacity>
-        <TouchableOpacity style={styles.iconBtn}><Text>📷</Text></TouchableOpacity>
-        <TextInput value={text} onChangeText={setText} style={styles.input} placeholder="Digite uma mensagem..." />
-        <TouchableOpacity onPress={send} style={styles.sendButton}>
-          <Text style={styles.sendText}>➤</Text>
-        </TouchableOpacity>
-      </View>
-    </KeyboardAvoidingView>
+        <View style={[styles.composer, { paddingBottom: insets.bottom || 12 }] }>
+          <TouchableOpacity style={styles.iconBtn}><Text>📎</Text></TouchableOpacity>
+          <TouchableOpacity style={styles.iconBtn}><Text>📷</Text></TouchableOpacity>
+          <TextInput value={text} onChangeText={setText} style={styles.input} placeholder="Digite uma mensagem..." />
+          <TouchableOpacity onPress={send} style={styles.sendButton}>
+            <Text style={styles.sendText}>➤</Text>
+          </TouchableOpacity>
+        </View>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 }
 
