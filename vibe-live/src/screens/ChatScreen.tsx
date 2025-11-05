@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
   headerMeta: { flexDirection: 'row', alignItems: 'center', flex: 1 },
   avatar: { width: 40, height: 40, borderRadius: 20, backgroundColor: '#e6e9ef', alignItems: 'center', justifyContent: 'center', marginRight: 10 },
   avatarText: { fontWeight: '700' },
+  avatarImage: { width: 40, height: 40, borderRadius: 20, marginRight: 10 },
   headerTitle: { fontWeight: '700' },
   headerStatus: { fontSize: 12, color: '#6b7280' },
   headerActions: { flexDirection: 'row', alignItems: 'center' },
