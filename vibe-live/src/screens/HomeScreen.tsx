@@ -87,7 +87,7 @@ export default function HomeScreen() {
       </View>
 
       <SectionList
-        sections={GROUPS}
+        sections={Array.isArray(GROUPS) ? GROUPS : []}
         keyExtractor={(item) => item.id}
         renderSectionHeader={({ section: { title } }) => (
           <TouchableOpacity
