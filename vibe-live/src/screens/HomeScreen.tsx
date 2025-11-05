@@ -34,9 +34,10 @@ const GROUPS = [
 
 export default function HomeScreen() {
   const navigation = useNavigation<NavProp>();
+  const insets = useSafeAreaInsets();
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={[styles.container, { paddingTop: insets.top }]}>
       <View style={styles.appBar}>
         <View style={styles.appBarLeft}>
           <Text style={styles.appTitle}>Live Messenger</Text>
@@ -84,7 +85,8 @@ export default function HomeScreen() {
           </TouchableOpacity>
         )}
       />
-    </View>
+
+    </SafeAreaView>
   );
 }
 
