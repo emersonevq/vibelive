@@ -1,56 +1,79 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Platform } from 'react-native';
-import type { BottomTabBarProps } from '@react-navigation/bottom-tabs';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-export default function CustomTabBar({ state, descriptors, navigation, insets }: BottomTabBarProps) {
-  const activeColor = '#16a34a';
-  const inactiveColor = '#9ca3af';
+export default function CustomTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
+  const insets = useSafeAreaInsets();
+
+  const getIconName = (routeName: string, focused: boolean) => {
+    switch (routeName) {
+      case 'Feed':
+        return focused ? 'home' : 'home-outline';
+      case 'Story':
+        return focused ? 'image' : 'image-outline';
+      case 'Mensagens':
+        return focused ? 'message-text' : 'message-text-outline';
+      case 'Perfil':
+        return focused ? 'account' : 'account-outline';
+      default:
+        return 'circle';
+    }
+  };
+
+  const getLabel = (routeName: string) => {
+    switch (routeName) {
+      case 'Feed':
+        return 'Feed';
+      case 'Story':
+        return 'Stories';
+      case 'Mensagens':
+        return 'Mensagens';
+      case 'Perfil':
+        return 'Perfil';
+      default:
+        return routeName;
+    }
+  };
 
   return (
-    <View style={[styles.container, { paddingBottom: Platform.OS === 'ios' ? (insets?.bottom ?? 0) : 8 }]}> 
+    <View style={[styles.container, { paddingBottom: insets.bottom }]}> 
       {state.routes.map((route, index) => {
-        const descriptor = descriptors[route.key];
         const focused = state.index === index;
-        const label =
-          descriptor.options.tabBarLabel !== undefined
-            ? descriptor.options.tabBarLabel
-            : descriptor.options.title !== undefined
-            ? descriptor.options.title
-            : route.name;
+        const options = descriptors[route.key].options;
 
         const onPress = () => {
-          const event = navigation.emit({ type: 'tabPress', target: route.key, canPreventDefault: true });
+          const event = navigation.emit({
+            type: 'tabPress',
+            target: route.key,
+            canPreventDefault: true,
+          });
+
           if (!focused && !event.defaultPrevented) {
-            navigation.navigate(route.name as never);
+            navigation.navigate(route.name as any);
           }
         };
 
-        const onLongPress = () => {
-          navigation.emit({ type: 'tabLongPress', target: route.key });
-        };
-
-        // Try to call the provided tabBarIcon, if present
-        const iconElement = (descriptor.options.tabBarIcon as any)
-          ? (descriptor.options.tabBarIcon as any)({ focused, color: focused ? activeColor : inactiveColor, size: 22 })
-          : null;
+        const color = focused ? '#16a34a' : '#9ca3af';
+        const iconName = getIconName(route.name, focused);
+        const label = getLabel(route.name);
 
         return (
           <TouchableOpacity
             key={route.key}
             accessibilityRole="button"
             accessibilityState={focused ? { selected: true } : {}}
-            accessibilityLabel={descriptor.options.tabBarAccessibilityLabel}
-            testID={descriptor.options.tabBarTestID}
+            accessibilityLabel={options.tabBarAccessibilityLabel}
+            testID={options.tabBarTestID}
             onPress={onPress}
-            onLongPress={onLongPress}
             style={styles.tab}
             activeOpacity={0.7}
           >
-            <View style={styles.iconWrap}>
-              {iconElement ?? <MaterialCommunityIcons name={focused ? 'circle' : 'circle-outline'} size={18} color={focused ? activeColor : inactiveColor} />}
-            </View>
-            <Text style={[styles.label, { color: focused ? activeColor : inactiveColor }]} numberOfLines={1}>{String(label)}</Text>
+            <MaterialCommunityIcons name={iconName as any} size={24} color={color} />
+            <Text style={[styles.label, { color }]} numberOfLines={1}>
+              {label}
+            </Text>
           </TouchableOpacity>
         );
       })}
@@ -61,22 +84,17 @@ export default function CustomTabBar({ state, descriptors, navigation, insets }:
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    height: 64,
     backgroundColor: '#fff',
     borderTopWidth: 1,
     borderTopColor: '#e5e7eb',
+    paddingTop: 8,
+    paddingHorizontal: 0,
   },
   tab: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 6,
-  },
-  iconWrap: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingVertical: 8,
   },
   label: {
     fontSize: 11,
