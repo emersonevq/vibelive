@@ -297,6 +297,19 @@ export default function StoryEditor({
           </View>
         </View>
       </Modal>
+
+      {/* Text Editor Modal */}
+      {selectedText && (
+        <TextEditor
+          visible={textEditorVisible}
+          text={selectedText}
+          onConfirm={handleConfirmTextEdit}
+          onCancel={() => {
+            setTextEditorVisible(false);
+            setSelectedText(null);
+          }}
+        />
+      )}
     </View>
   );
 }
