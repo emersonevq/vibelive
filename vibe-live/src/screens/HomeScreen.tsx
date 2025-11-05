@@ -10,23 +10,23 @@ const GROUPS = [
   {
     title: 'Amigos',
     data: [
-      { id: '1', name: 'Ana Silva', last: 'Estudando para as provas!', online: true, unread: 2 },
-      { id: '2', name: 'Julia Oliveira', last: 'Feliz! 🎉', online: false, unread: 0 },
+      { id: '1', name: 'Ana Silva', last: 'Estudando para as provas!', online: true, unread: 2, avatarUrl: 'https://randomuser.me/api/portraits/women/65.jpg' },
+      { id: '2', name: 'Julia Oliveira', last: 'Feliz! 🎉', online: false, unread: 0, avatarUrl: 'https://randomuser.me/api/portraits/women/68.jpg' },
     ],
   },
   {
     title: 'Família',
     data: [
-      { id: '3', name: 'Mariana Costa', last: 'Ouvindo música 🎵', online: true, unread: 1 },
-      { id: '4', name: 'Roberto Silva', last: 'Última vez online: ontem 22:30', online: false, unread: 0 },
+      { id: '3', name: 'Mariana Costa', last: 'Ouvindo música 🎵', online: true, unread: 1, avatarUrl: 'https://randomuser.me/api/portraits/women/44.jpg' },
+      { id: '4', name: 'Roberto Silva', last: 'Última vez online: ontem 22:30', online: false, unread: 0, avatarUrl: 'https://randomuser.me/api/portraits/men/22.jpg' },
     ],
   },
   {
     title: 'Trabalho',
     data: [
-      { id: '5', name: 'Carlos Santos', last: 'Voltei em 10 min', online: false, unread: 0 },
-      { id: '6', name: 'Fernanda Costa', last: 'Almoçando...', online: false, unread: 0 },
-      { id: '7', name: 'Pedro Lima', last: 'Em reunião até 16h', online: false, unread: 0 },
+      { id: '5', name: 'Carlos Santos', last: 'Voltei em 10 min', online: false, unread: 0, avatarUrl: 'https://randomuser.me/api/portraits/men/34.jpg' },
+      { id: '6', name: 'Fernanda Costa', last: 'Almoçando...', online: false, unread: 0, avatarUrl: 'https://randomuser.me/api/portraits/women/12.jpg' },
+      { id: '7', name: 'Pedro Lima', last: 'Em reunião até 16h', online: false, unread: 0, avatarUrl: 'https://randomuser.me/api/portraits/men/52.jpg' },
     ],
   },
 ];
