@@ -41,7 +41,7 @@ function MainTabs() {
           marginRight: 8,
         },
         tabBarLabelStyle: { fontSize: 11, fontWeight: '600', marginTop: 4 },
-        tabBarActiveTintColor: '#2563EB',
+        tabBarActiveTintColor: '#16a34a',
         tabBarInactiveTintColor: '#9ca3af',
         tabBarIconStyle: { marginTop: 2 },
       }}
