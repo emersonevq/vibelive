@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet, TextInput, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { v4 as uuidv4 } from 'uuid';
+import MaterialIcon from '../components/MaterialIcon';
 
 type Scrap = {
   id: string;
@@ -14,7 +15,7 @@ const ONE_HOUR = 60 * 60 * 1000;
 
 const initial: Scrap[] = [
   { id: 's1', text: 'Alguém vem tomar um café?', createdAt: Date.now() - 20 * 60 * 1000, author: 'Ana' },
-  { id: 's2', text: 'Boa ideia: meetup hoje 18h', createdAt: Date.now() - 70 * 60 * 1000, author: 'Carlos' }, // expired
+  { id: 's2', text: 'Boa ideia: meetup hoje 18h', createdAt: Date.now() - 70 * 60 * 1000, author: 'Carlos' },
   { id: 's3', text: 'Vendas batendo meta! 🎉', createdAt: Date.now() - 5 * 60 * 1000, author: 'Pedro' },
 ];
 
@@ -24,7 +25,6 @@ export default function ScrapsScreen() {
 
   useEffect(() => {
     const t = setInterval(() => {
-      // remove expired scraps periodically
       setScraps((s) => s.filter((x) => Date.now() - x.createdAt < ONE_HOUR));
     }, 30 * 1000);
     return () => clearInterval(t);
@@ -34,7 +34,7 @@ export default function ScrapsScreen() {
 
   const add = () => {
     if (!text.trim()) {
-      Alert.alert('Escreva algo');
+      Alert.alert('Campo vazio', 'Escreva algo para compartilhar');
       return;
     }
     const newItem: Scrap = { id: uuidv4(), text: text.trim(), createdAt: Date.now(), author: 'Você' };
@@ -45,23 +45,31 @@ export default function ScrapsScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerIcon}>📝</Text>
-        <Text style={styles.title}>Scraps (temporários)</Text>
+        <MaterialIcon name="file-document" size={24} color="#2563EB" />
+        <Text style={styles.title}>Scraps Rápidos</Text>
       </View>
 
       <View style={styles.composerCard}>
-        <Text style={styles.composerLabel}>Compartilhe uma mensagem rápida</Text>
+        <Text style={styles.composerLabel}>Compartilhe uma mensagem rápida (expira em 1h)</Text>
         <View style={styles.composer}>
-          <TextInput value={text} onChangeText={setText} placeholder="Escreva um recado..." style={styles.input} placeholderTextColor="#9ca3af" />
+          <TextInput 
+            value={text} 
+            onChangeText={setText} 
+            placeholder="Escreva um recado..." 
+            style={styles.input} 
+            placeholderTextColor="#9ca3af"
+            multiline
+            maxHeight={80}
+          />
           <TouchableOpacity style={styles.button} onPress={add}>
-            <Text style={styles.buttonText}>➤</Text>
+            <MaterialIcon name="send" size={20} color="#fff" />
           </TouchableOpacity>
         </View>
       </View>
 
       {visible.length === 0 ? (
         <View style={styles.empty}>
-          <Text style={styles.emptyIcon}>📬</Text>
+          <MaterialIcon name="inbox-multiple" size={64} color="#d1d5db" />
           <Text style={styles.emptyText}>Nenhum scrap ativo</Text>
           <Text style={styles.emptySubtext}>Scraps desaparecem após 1 hora</Text>
         </View>
@@ -78,7 +86,10 @@ export default function ScrapsScreen() {
                 </View>
                 <View style={styles.cardMeta}>
                   <Text style={styles.cardAuthor}>{item.author}</Text>
-                  <Text style={styles.cardTime}>{new Date(item.createdAt).toLocaleTimeString()}</Text>
+                  <View style={styles.timeRow}>
+                    <MaterialIcon name="clock-outline" size={12} color="#9ca3af" />
+                    <Text style={styles.cardTime}> {new Date(item.createdAt).toLocaleTimeString()}</Text>
+                  </View>
                 </View>
               </View>
               <Text style={styles.cardText}>{item.text}</Text>
@@ -91,27 +102,25 @@ export default function ScrapsScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#f5f5f5' },
+  container: { flex: 1, backgroundColor: '#f8fafc' },
   header: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#fff', paddingHorizontal: 16, paddingVertical: 14, borderBottomWidth: 1, borderBottomColor: '#e5e7eb' },
-  headerIcon: { fontSize: 24, marginRight: 10 },
-  title: { fontSize: 20, fontWeight: '700', color: '#111827' },
+  title: { fontSize: 20, fontWeight: '700', color: '#111827', marginLeft: 10 },
   composerCard: { backgroundColor: '#fff', margin: 12, padding: 16, borderRadius: 12, elevation: 2, shadowColor: '#000', shadowOpacity: 0.05, shadowRadius: 4, shadowOffset: { width: 0, height: 2 } },
-  composerLabel: { fontSize: 14, fontWeight: '600', color: '#6b7280', marginBottom: 10 },
-  composer: { flexDirection: 'row', alignItems: 'center' },
-  input: { flex: 1, backgroundColor: '#f9fafb', borderRadius: 20, paddingHorizontal: 16, paddingVertical: 10, fontSize: 14, marginRight: 8, color: '#111827' },
-  button: { backgroundColor: '#2563EB', width: 40, height: 40, borderRadius: 20, alignItems: 'center', justifyContent: 'center' },
-  buttonText: { color: '#fff', fontSize: 18, fontWeight: '700' },
+  composerLabel: { fontSize: 13, fontWeight: '600', color: '#6b7280', marginBottom: 12 },
+  composer: { flexDirection: 'row', alignItems: 'flex-end', gap: 8 },
+  input: { flex: 1, backgroundColor: '#f9fafb', borderRadius: 12, paddingHorizontal: 14, paddingVertical: 10, fontSize: 14, color: '#111827', borderWidth: 1, borderColor: '#e5e7eb', maxHeight: 80 },
+  button: { backgroundColor: '#2563EB', width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center' },
   empty: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 40 },
-  emptyIcon: { fontSize: 48, marginBottom: 16 },
-  emptyText: { fontSize: 16, color: '#6b7280', fontWeight: '600' },
-  emptySubtext: { fontSize: 13, color: '#9ca3af', marginTop: 4 },
+  emptyText: { fontSize: 16, color: '#6b7280', fontWeight: '600', marginTop: 12 },
+  emptySubtext: { fontSize: 13, color: '#9ca3af', marginTop: 4, textAlign: 'center' },
   listContent: { padding: 12 },
   card: { backgroundColor: '#fff', padding: 14, borderRadius: 12, marginBottom: 10, elevation: 1, shadowColor: '#000', shadowOpacity: 0.04, shadowRadius: 3, shadowOffset: { width: 0, height: 1 } },
-  cardHeader: { flexDirection: 'row', alignItems: 'center', marginBottom: 10 },
-  authorAvatar: { width: 36, height: 36, borderRadius: 18, backgroundColor: '#2563EB', alignItems: 'center', justifyContent: 'center', marginRight: 10 },
-  authorInitial: { color: '#fff', fontWeight: '700', fontSize: 14 },
+  cardHeader: { flexDirection: 'row', alignItems: 'center', marginBottom: 12 },
+  authorAvatar: { width: 40, height: 40, borderRadius: 20, backgroundColor: '#dbeafe', alignItems: 'center', justifyContent: 'center', marginRight: 12 },
+  authorInitial: { color: '#2563EB', fontWeight: '700', fontSize: 14 },
   cardMeta: { flex: 1 },
   cardAuthor: { fontWeight: '700', fontSize: 14, color: '#111827' },
-  cardTime: { color: '#9ca3af', fontSize: 12, marginTop: 2 },
+  timeRow: { flexDirection: 'row', alignItems: 'center', marginTop: 2 },
+  cardTime: { color: '#9ca3af', fontSize: 12 },
   cardText: { fontSize: 14, color: '#374151', lineHeight: 20 },
 });
