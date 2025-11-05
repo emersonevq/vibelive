@@ -20,7 +20,7 @@ export default function ProfileScreen() {
         <View style={styles.profileInfo}>
           <Text style={styles.name}>Usuário Visitante</Text>
           <View style={styles.statusRow}>
-            <MaterialIcon name="music" size={14} color="#f97316" />
+            <MaterialIcon name="music" size={14} color="#16a34a" />
             <Text style={styles.status}> Ouvindo: Nothing for now</Text>
           </View>
         </View>
@@ -44,7 +44,7 @@ export default function ProfileScreen() {
 
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <MaterialIcon name="information" size={22} color="#2563EB" />
+            <MaterialIcon name="information" size={22} color="#16a34a" />
             <Text style={styles.sectionTitle}>Sobre</Text>
           </View>
           <Text style={styles.sectionText}>Perfil mockado para demonstração do aplicativo Live Messenger.</Text>
@@ -52,33 +52,33 @@ export default function ProfileScreen() {
 
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <MaterialIcon name="cog" size={22} color="#2563EB" />
+            <MaterialIcon name="cog" size={22} color="#16a34a" />
             <Text style={styles.sectionTitle}>Configurações</Text>
           </View>
           <TouchableOpacity style={styles.option}>
             <View style={styles.optionLeft}>
-              <MaterialIcon name="account-edit" size={20} color="#2563EB" style={styles.optionIcon} />
+              <MaterialIcon name="account-edit" size={20} color="#16a34a" style={styles.optionIcon} />
               <Text style={styles.optionText}>Editar perfil</Text>
             </View>
             <MaterialIcon name="chevron-right" size={24} color="#9ca3af" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.option}>
             <View style={styles.optionLeft}>
-              <MaterialIcon name="shield-account" size={20} color="#2563EB" style={styles.optionIcon} />
+              <MaterialIcon name="shield-account" size={20} color="#16a34a" style={styles.optionIcon} />
               <Text style={styles.optionText}>Privacidade</Text>
             </View>
             <MaterialIcon name="chevron-right" size={24} color="#9ca3af" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.option}>
             <View style={styles.optionLeft}>
-              <MaterialIcon name="bell" size={20} color="#2563EB" style={styles.optionIcon} />
+              <MaterialIcon name="bell" size={20} color="#16a34a" style={styles.optionIcon} />
               <Text style={styles.optionText}>Notificações</Text>
             </View>
             <MaterialIcon name="chevron-right" size={24} color="#9ca3af" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.option}>
             <View style={styles.optionLeft}>
-              <MaterialIcon name="palette" size={20} color="#2563EB" style={styles.optionIcon} />
+              <MaterialIcon name="palette" size={20} color="#16a34a" style={styles.optionIcon} />
               <Text style={styles.optionText}>Tema</Text>
             </View>
             <MaterialIcon name="chevron-right" size={24} color="#9ca3af" />
@@ -87,19 +87,19 @@ export default function ProfileScreen() {
 
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <MaterialIcon name="help-circle" size={22} color="#2563EB" />
+            <MaterialIcon name="help-circle" size={22} color="#16a34a" />
             <Text style={styles.sectionTitle}>Suporte</Text>
           </View>
           <TouchableOpacity style={styles.option}>
             <View style={styles.optionLeft}>
-              <MaterialIcon name="frequently-asked-questions" size={20} color="#f97316" style={styles.optionIcon} />
+              <MaterialIcon name="frequently-asked-questions" size={20} color="#16a34a" style={styles.optionIcon} />
               <Text style={styles.optionText}>Ajuda e FAQ</Text>
             </View>
             <MaterialIcon name="chevron-right" size={24} color="#9ca3af" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.option}>
             <View style={styles.optionLeft}>
-              <MaterialIcon name="bug" size={20} color="#f97316" style={styles.optionIcon} />
+              <MaterialIcon name="bug" size={20} color="#16a34a" style={styles.optionIcon} />
               <Text style={styles.optionText}>Reportar problema</Text>
             </View>
             <MaterialIcon name="chevron-right" size={24} color="#9ca3af" />
