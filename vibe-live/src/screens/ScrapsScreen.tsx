@@ -3,6 +3,9 @@ import { View, Text, FlatList, TouchableOpacity, StyleSheet, TextInput, Alert } 
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { v4 as uuidv4 } from 'uuid';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../navigation/RootNavigator';
 
 type Scrap = {
   id: string;
@@ -20,6 +23,7 @@ const initial: Scrap[] = [
 ];
 
 export default function ScrapsScreen() {
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [scraps, setScraps] = useState<Scrap[]>(initial);
   const [text, setText] = useState('');
 
@@ -61,10 +65,9 @@ export default function ScrapsScreen() {
             <Text style={styles.subtitle}>Mensagens que desaparecem em 1h</Text>
           </View>
         </View>
-        <View style={styles.headerStats}>
-          <Text style={styles.statsNumber}>{visible.length}</Text>
-          <Text style={styles.statsLabel}>ativos</Text>
-        </View>
+        <TouchableOpacity style={styles.headerNotifBtn} onPress={() => navigation.navigate('Notifications')}>
+          <MaterialCommunityIcons name="bell-outline" size={22} color="#16a34a" />
+        </TouchableOpacity>
       </View>
 
       {/* Composer melhorado */}
@@ -189,12 +192,13 @@ const styles = StyleSheet.create({
   },
   title: { fontSize: 18, fontWeight: '700', color: '#111827' },
   subtitle: { fontSize: 12, color: '#6b7280', marginTop: 2 },
-  headerStats: {
-    alignItems: 'center',
+  headerNotifBtn: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
     backgroundColor: '#dcfce7',
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   statsNumber: {
     fontSize: 16,
