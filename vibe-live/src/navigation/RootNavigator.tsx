@@ -60,20 +60,22 @@ function MainTabs() {
           tabBarLabel: 'Feed'
         }}
       />
+
       <Tab.Screen
-        name="Criar"
-        component={require('../screens/CreateScreen').default}
+        name="Story"
+        component={require('../screens/StoryScreen').default}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
             <MaterialCommunityIcons
-              name={focused ? 'plus-circle' : 'plus-circle-outline'}
+              name={focused ? 'image' : 'image-outline'}
               size={size}
               color={color}
             />
           ),
-          tabBarLabel: 'Criar'
+          tabBarLabel: 'Stories'
         }}
       />
+
       <Tab.Screen
         name="Mensagens"
         component={HomeScreen}
@@ -88,20 +90,7 @@ function MainTabs() {
           tabBarLabel: 'Mensagens'
         }}
       />
-      <Tab.Screen
-        name="Notificações"
-        component={require('../screens/NotificationsScreen').default}
-        options={{
-          tabBarIcon: ({ focused, color, size }) => (
-            <MaterialCommunityIcons
-              name={focused ? 'bell' : 'bell-outline'}
-              size={size}
-              color={color}
-            />
-          ),
-          tabBarLabel: 'Notificações'
-        }}
-      />
+
       <Tab.Screen
         name="Perfil"
         component={require('../screens/ProfileScreen').default}
