@@ -60,7 +60,7 @@ export default function ChatScreen({ route, navigation }: Props) {
         </View>
 
         <FlatList
-          data={messages}
+          data={Array.isArray(messages) ? messages : []}
           keyExtractor={(m) => m.id}
           renderItem={({ item }) => (
             <View style={[styles.messageRow, item.fromMe && styles.messageRowRight]}>
