@@ -7,7 +7,7 @@ import HomeScreen from '../screens/HomeScreen';
 import ChatScreen from '../screens/ChatScreen';
 import { useAuth } from './auth';
 import { NavigationContainer } from '@react-navigation/native';
-import { Text } from 'react-native';
+import MaterialIcon from '../components/MaterialIcon';
 
 export type RootStackParamList = {
   Auth: undefined;
