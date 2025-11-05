@@ -327,6 +327,12 @@ export default function StoryEditor({ initialBackground, onClose, onPublish }: P
           onChangeReplies={setAllowReplies}
         />
         <View style={styles.publishRow}>
+          {background.type === 'video' && (
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginBottom: 8, gap: 8 }}>
+              <MaterialCommunityIcons name="clock-outline" color="#e5e7eb" size={16} />
+              <Text style={{ color: '#e5e7eb', fontWeight: '600' }}>{Math.round((background.duration || 0) / 1000)}s</Text>
+            </View>
+          )}
           <TouchableOpacity accessibilityLabel="Adicionar ao story" onPress={publish} style={styles.publishBtn}>
             <MaterialCommunityIcons name="send" color="#fff" size={18} />
             <Text style={styles.publishText}>Adicionar ao story</Text>
