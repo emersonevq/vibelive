@@ -45,4 +45,5 @@ export type StoryComposition = {
   privacy: Privacy;
   allowShare: boolean;
   allowReplies: boolean;
+  exportUri?: string;
 };
