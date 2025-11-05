@@ -50,7 +50,7 @@ export default function HomeScreen() {
         <View style={styles.appBarLeft}>
           <View style={styles.logoContainer}>
             <View style={styles.logoCircle}>
-              <MaterialIcon name="chat" size={18} color="#fff" />
+              <MaterialCommunityIcons name="chat" size={18} color="#fff" />
             </View>
             <View>
               <Text style={styles.appTitle}>Live Messenger</Text>
@@ -59,10 +59,10 @@ export default function HomeScreen() {
         </View>
         <View style={styles.appBarRight}>
           <TouchableOpacity style={styles.headerIconBtn}>
-            <MaterialIcon name="cog" size={22} color="#fff" />
+            <MaterialCommunityIcons name="cog" size={22} color="#fff" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.headerIconBtn}>
-            <MaterialIcon name="folder" size={22} color="#fff" />
+            <MaterialCommunityIcons name="folder" size={22} color="#fff" />
           </TouchableOpacity>
         </View>
       </View>
@@ -77,12 +77,12 @@ export default function HomeScreen() {
           <Text style={styles.profileOnline}>Online</Text>
         </View>
         <TouchableOpacity>
-          <MaterialIcon name="chevron-down" size={20} color="#6b7280" />
+          <MaterialCommunityIcons name="chevron-down" size={20} color="#6b7280" />
         </TouchableOpacity>
       </View>
 
       <View style={styles.searchContainer}>
-        <MaterialIcon name="magnify" size={18} color="#6b7280" />
+        <MaterialCommunityIcons name="magnify" size={18} color="#6b7280" />
         <TextInput placeholder="Pesquisar contatos..." style={styles.search} placeholderTextColor="#9ca3af" />
       </View>
 
@@ -94,9 +94,9 @@ export default function HomeScreen() {
             style={styles.sectionHeader}
             onPress={() => toggleSection(title)}
           >
-            <MaterialIcon 
-              name={expandedSections.includes(title) ? 'chevron-down' : 'chevron-right'} 
-              size={18} 
+            <MaterialCommunityIcons
+              name={expandedSections.includes(title) ? 'chevron-down' : 'chevron-right'}
+              size={18}
               color="#6b7280"
             />
             <Text style={styles.sectionTitle}>{title}</Text>
