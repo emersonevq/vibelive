@@ -66,7 +66,20 @@ export default function StoryScreen() {
     setSelectedMediaUri(null);
   };
 
+  if (storyEditorVisible && selectedMediaUri) {
+    return (
+      <>
+        <StoryEditor
+          imageUri={selectedMediaUri}
+          onPublish={handlePublishStory}
+          onCancel={handleCancelEditor}
+        />
+      </>
+    );
+  }
+
   return (
+    <>
     <SafeAreaView style={styles.container}>
       {/* Header moderno */}
       <View style={styles.header}>
@@ -241,6 +254,12 @@ export default function StoryScreen() {
         </View>
       </View>
     </SafeAreaView>
+    <MediaSelector
+      visible={mediaSelectorVisible}
+      onMediaSelected={handleMediaSelected}
+      onCancel={() => setMediaSelectorVisible(false)}
+    />
+    </>
   );
 }
 
