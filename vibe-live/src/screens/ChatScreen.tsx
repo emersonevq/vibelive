@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
   messageRowRight: { alignItems: 'flex-end' },
   bubble: { maxWidth: '75%', paddingHorizontal: 14, paddingVertical: 10, borderRadius: 18 },
   bubbleOther: { backgroundColor: '#fff', borderBottomLeftRadius: 4 },
-  bubbleMe: { backgroundColor: '#2563EB', borderBottomRightRadius: 4 },
+  bubbleMe: { backgroundColor: '#16a34a', borderBottomRightRadius: 4 },
   messageText: { fontSize: 14, color: '#111827', lineHeight: 20 },
   messageTextMe: { color: '#fff' },
   messageTime: { fontSize: 11, color: '#9ca3af', marginTop: 4, textAlign: 'right' },
